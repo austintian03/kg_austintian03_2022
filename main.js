@@ -1,6 +1,3 @@
-//retrieve numbers from commandline arguments and convert from string to number
-const nums = process.argv.slice(2).map(n => +n);
-
 //helper function to convert a single digit to phonetic equivalent
 const digitToWord = n => {
     let word;
@@ -40,3 +37,21 @@ const digitToWord = n => {
     }
     return word;
 }; 
+
+//solution 
+const nums = process.argv.slice(2).map(n => +n); //retrieve numbers from commandline arguments
+const result = nums.map(n => { //array of strings representing phonetic equivalents
+    if (n === 0) {
+        return "Zero";
+    }
+
+    let digit;
+    let phonetic = '';
+    while (n > 0) {
+        digit = digitToWord(n % 10);
+        phonetic = digit + phonetic;
+        n = Math.floor(n / 10);
+    }
+    return phonetic;
+});
+console.log(result.toString());
